@@ -20,8 +20,7 @@
 }
 
 .Grid-cell:hover {
-    border: solid 1px grey;
-    background-color: rgb(157, 141, 248);
+    border: solid 1px grey;    
 }
 
 .Grid-cell--active {
@@ -29,5 +28,6 @@
 }
 
 .Grid-cell--selected {
-    background-color: rgba(248, 141, 141, 0.5);
+    background-color: rgba(248, 155, 155, 0.5);
+    border: solid 2px grey;
 }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
+import { sendGridState } from 'hooks/gridData';
+import { debounce } from 'lodash';
 
 export default function Grid({ gridSize }) {
 
@@ -12,6 +14,19 @@ export default function Grid({ gridSize }) {
     const [singleClickTimer, setSingleClickTimer] = useState(null);
     const [isDoubleClick, setIsDoubleClick] = useState(false);
     const [arrayColor, setArrayColor] = useState(false)
+
+    const debouncedSendGridState = debounce(sendGridState, 2000); // 2000ms debounce time
+
+    // Call this function every time the grid state changes
+    const handleGridStateChange = (newGridState) => {
+        debouncedSendGridState(newGridState);
+    };
+
+    // Call the debounced function when grid state changes
+    useEffect(() => {
+        handleGridStateChange(grid);
+    }, [grid]);
+
 
     // Initialize the grid
     useEffect(() => {
@@ -150,7 +165,7 @@ export default function Grid({ gridSize }) {
                 ))}
             </div>
             <div className='text-center'>
-            <button className='btn btnPurple my-4' onClick={loadGrid}> Reset <FontAwesomeIcon icon={faSync} /> </button>
+                <button className='btn btnPurple my-4' onClick={loadGrid}> Reset <FontAwesomeIcon icon={faSync} /> </button>
             </div>
         </>
 

@@ -20,6 +20,11 @@ small {
     text-align: -webkit-center;
 }
 
+.svg {
+    width: 1em;
+    min-width: 1em;
+}
+
 .btnPurple {
     width: 100%;
     max-width: 250px;

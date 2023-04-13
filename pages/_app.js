@@ -3,6 +3,7 @@ import "../css/global.css"
 import "../css/Grid.css"
 import "../css/Responsive.css"
 
+
 import { GlobalProvider } from "helpers/GlobalContext";
 import { SSRProvider } from "react-bootstrap";
 

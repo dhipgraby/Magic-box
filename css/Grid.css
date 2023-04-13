@@ -1,6 +1,7 @@
 .Grid {
     display: flex;
     flex-direction: column;
+    margin-top: 40px;
 }
 
 .Grid-row {
@@ -16,7 +17,7 @@
 }
 
 .Grid-cell:hover {
-    background-color: rgba(255, 0, 0, 0.5);
+    border: solid 1px grey;    
 }
 
 .Grid-cell--active {
@@ -24,5 +25,5 @@
 }
 
 .Grid-cell--selected {
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: rgba(248, 141, 141, 0.5);
 }

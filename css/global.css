@@ -12,6 +12,10 @@ small {
     color: white;
 }
 
+.purple {
+    color:rgb(144, 125, 252);    
+}
+
 .ta-c {
     text-align: -webkit-center;
 }

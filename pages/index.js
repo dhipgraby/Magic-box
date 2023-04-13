@@ -14,8 +14,8 @@ export default function Home() {
 
   return (
     <Layout>
-      <h1>Magic Box</h1>
-      <small>Having drawing in the Grid!</small>
+      <h1 className="purple">Magic Box</h1>
+      <small>Have Fun Drawing in the Grid!</small>
       <hr />
       <CreateGridBtn
         handleGridSizeChange={handleGridSizeChange}

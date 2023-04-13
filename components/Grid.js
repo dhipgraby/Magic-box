@@ -27,7 +27,6 @@ export default function Grid({ gridSize }) {
         handleGridStateChange(grid);
     }, [grid]);
 
-
     // Initialize the grid
     useEffect(() => {
         loadGrid()
@@ -40,6 +39,10 @@ export default function Grid({ gridSize }) {
         }
         setGrid(newGrid);
     }
+    
+    useEffect(() => {
+        mouseDownRef.current = mouseDown;
+    }, [mouseDown]);
 
     // Flip the color of the cell
     const flipColor = (row, col, targetColor = null) => {
@@ -50,10 +53,6 @@ export default function Grid({ gridSize }) {
             return newGrid;
         });
     };
-
-    useEffect(() => {
-        mouseDownRef.current = mouseDown;
-    }, [mouseDown]);
 
     // Handle cell mouse down
     const handleCellMouseDown = (event, row, col) => {
@@ -134,7 +133,6 @@ export default function Grid({ gridSize }) {
         setLongPress(false);
         setSelectedCells([]);
     }
-
     // Render the grid
     return (
         <>

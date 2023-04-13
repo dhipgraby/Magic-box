@@ -1,6 +1,5 @@
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../css/global.css"
-import "../css/main.css"
 import "../css/Grid.css"
 import "../css/Responsive.css"
 

@@ -1,0 +1,9 @@
+.ul {
+    color:  rgb(157, 141, 248);
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.ul span {
+    color: white;
+}

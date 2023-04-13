@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSync } from '@fortawesome/free-solid-svg-icons';
 
 export default function Grid({ gridSize }) {
 
@@ -9,19 +11,24 @@ export default function Grid({ gridSize }) {
     const [selectedCells, setSelectedCells] = useState([]);
     const [singleClickTimer, setSingleClickTimer] = useState(null);
     const [isDoubleClick, setIsDoubleClick] = useState(false);
+    const [arrayColor, setArrayColor] = useState(false)
 
     // Initialize the grid
     useEffect(() => {
+        loadGrid()
+    }, [gridSize]);
+
+    const loadGrid = () => {
         const newGrid = [];
         for (let i = 0; i < gridSize; i++) {
             newGrid.push(Array(gridSize).fill(false));
         }
         setGrid(newGrid);
-    }, [gridSize]);
+    }
 
     // Flip the color of the cell
-    const flipColor = (row, col) => {
-        const toggleGrid = !grid[row][col]
+    const flipColor = (row, col, targetColor = null) => {
+        const toggleGrid = (targetColor != null) ? targetColor : !grid[row][col];
         setGrid((prevGrid) => {
             let newGrid = [...prevGrid];
             newGrid[row][col] = toggleGrid;
@@ -35,6 +42,9 @@ export default function Grid({ gridSize }) {
 
     // Handle cell mouse down
     const handleCellMouseDown = (event, row, col) => {
+
+        const targetColor = grid[row][col]
+
         if (event.button === 0) {
             event.preventDefault()
             setMouseDown(true);
@@ -42,7 +52,7 @@ export default function Grid({ gridSize }) {
             const timer = setTimeout(() => {
                 if (mouseDownRef.current) {
                     setLongPress(true);
-                    flipColor(row, col)
+                    setArrayColor(targetColor);
                 }
 
             }, 1000); // Set to 1000ms (1 second) for long press
@@ -52,15 +62,14 @@ export default function Grid({ gridSize }) {
     };
 
     // Handle cell mouse up
-    const handleCellMouseUp = () => {
+    const handleCellMouseUp = (row, col) => {
+
         if (longPress) {
             selectedCells.forEach((cell) => {
-                flipColor(cell.row, cell.col);
+                flipColor(cell.row, cell.col, arrayColor);
             });
         }
-        setMouseDown(false);
-        setLongPress(false);
-        setSelectedCells([]);
+        mouseLeaveScreen()
     };
 
     // Handle cell mouse over
@@ -105,30 +114,46 @@ export default function Grid({ gridSize }) {
         setSingleClickTimer(setTimeout(() => flipColorSingleClick(row, col), 200));
     };
 
+    const mouseLeaveScreen = () => {
+        setMouseDown(false);
+        setLongPress(false);
+        setSelectedCells([]);
+    }
+
     // Render the grid
     return (
-        <div className="Grid">
-            {grid.map((row, rowIndex) => (
-                <div key={rowIndex} className="Grid-row">
-                    {row.map((cell, colIndex) => {
-                        const isSelected = selectedCells.some((selectedCell) => selectedCell.row === rowIndex && selectedCell.col === colIndex);
-                        return (
-                            <div
-                                key={colIndex}
-                                className={`Grid-cell ${cell ? 'Grid-cell--active' : ''} ${isSelected ? 'Grid-cell--selected' : ''}`}
-                                onClick={() => handleCellClick(rowIndex, colIndex)}
-                                onDoubleClick={() => {
-                                    setIsDoubleClick(true);
-                                    handleCellDoubleClick(rowIndex, colIndex);
-                                }}
-                                onMouseDown={(event) => handleCellMouseDown(event, rowIndex, colIndex)}
-                                onMouseUp={() => handleCellMouseUp(rowIndex, colIndex)}
-                                onMouseEnter={() => handleCellMouseEnter(rowIndex, colIndex)}
-                            />
-                        );
-                    })}
-                </div>
-            ))}
-        </div>
+        <>
+            <div
+                className="Grid"
+                onMouseLeave={() => mouseLeaveScreen()}
+            >
+                {grid.map((row, rowIndex) => (
+                    <div key={rowIndex} className="Grid-row">
+                        {row.map((cell, colIndex) => {
+                            const isSelected = selectedCells.some((selectedCell) => selectedCell.row === rowIndex && selectedCell.col === colIndex);
+                            return (
+                                <div
+                                    key={colIndex}
+                                    className={`Grid-cell ${cell ? 'Grid-cell--active' : ''} ${isSelected ? 'Grid-cell--selected' : ''}`}
+                                    onClick={() => handleCellClick(rowIndex, colIndex)}
+                                    onDoubleClick={() => {
+                                        setIsDoubleClick(true);
+                                        handleCellDoubleClick(rowIndex, colIndex);
+                                    }}
+                                    onMouseDown={(event) => handleCellMouseDown(event, rowIndex, colIndex)}
+                                    onMouseUp={() => handleCellMouseUp(rowIndex, colIndex)}
+                                    onMouseEnter={() => handleCellMouseEnter(rowIndex, colIndex)}
+                                />
+                            );
+                        })}
+                    </div>
+                ))}
+            </div>
+            <div className='text-center'>
+            <button className='btn btnPurple my-4' onClick={loadGrid}> Reset <FontAwesomeIcon icon={faSync} /> </button>
+            </div>
+        </>
+
+
     );
 };

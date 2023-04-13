@@ -1,38 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Magic Box App
 
-## Getting Started
+This is a React-based app that creates an interactive grid with adjustable size. Users can manipulate the grid by clicking, double-clicking, or long-pressing individual cells.
 
-First, run the development server:
+## Approach
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+The app is built using React and makes use of functional components and hooks for state management. The main component, `Grid`, is responsible for managing the grid's state and user interactions. It also renders the grid by mapping over the grid array and creating rows and cells.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Basic Design Choices
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+1. The state of the grid is stored as a 2D array, with each cell represented by a boolean value. The `gridSize` prop determines the dimensions of the grid.
+2. The grid is created by populating the 2D array with `false` values initially, which represent the inactive state of a cell.
+3. Event handlers are used to handle various user interactions like single-click, double-click, and long-press on grid cells. These event handlers update the grid state accordingly.
+4. The updated state is used to render the grid with appropriate CSS classes to visually represent the active/inactive state of each cell.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Documentation
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Components
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- `Grid`: The main component that handles the grid's state and user interactions.
+- `GridRow` (refactored): A component that represents a single row in the grid.
+- `GridCell` (refactored): A component that represents an individual cell in the grid.
 
-## Learn More
+### Custom Functions
 
-To learn more about Next.js, take a look at the following resources:
+- `loadGrid`: Initializes the grid with the specified `gridSize`.
+- `flipColor`: Flips the color of a cell based on the row and column passed as arguments.
+- `handleCellMouseDown`: Handles the mouse down event on a cell.
+- `handleCellMouseUp`: Handles the mouse up event on a cell.
+- `handleCellMouseEnter`: Handles the mouse enter event on a cell.
+- `handleCellDoubleClick`: Handles the double-click event on a cell.
+- `flipColorSingleClick`: Flips the color of a cell for a single click event.
+- `handleCellClick`: Handles the single click event on a cell.
+- `mouseLeaveScreen`: Resets the necessary states when the mouse leaves the screen.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### State Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- `grid`: The 2D array representing the grid's state.
+- `mouseDown`: A boolean indicating whether the mouse is pressed down.
+- `longPress`: A boolean indicating whether a long press event is detected.
+- `selectedCells`: An array containing the currently selected cells during a long press event.
+- `singleClickTimer`: A timer used to differentiate between single and double-click events.
+- `isDoubleClick`: A boolean indicating whether a double-click event is detected.
+- `arrayColor`: A boolean representing the target color during a long press event.
 
-## Deploy on Vercel
+### Event Handlers
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The following event handlers are used to manipulate the grid based on user interactions:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Single click: Flips the color of the clicked cell.
+- Double-click: Flips the color of the clicked cell and sets the same color for all other cells in the same column.
+- Long press: Allows the user to drag the mouse over multiple cells, flipping their colors to a target color.
+
+## Usage
+
+1. Clone the repository
+2. Install dependencies using `npm install` or `yarn install`
+3. Create .env file and add REACT_APP_TARGET_URL to send latest state of the application
+3. Run the development server using `npm run dev` or `yarn dev`
+4. Open the app in your browser at `http://localhost:3000`

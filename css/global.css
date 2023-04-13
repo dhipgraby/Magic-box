@@ -1,10 +1,19 @@
 body {
     background-color: black;
-    padding-top: 40px;
+    padding-top: 20px;
+}
+
+small {
+    font-style: italic;
+    letter-spacing: 1px;
 }
 
 .mainContainer {
     color: white;
+}
+
+.ta-c {
+    text-align: -webkit-center;
 }
 
 .btnPurple {
@@ -18,7 +27,19 @@ body {
     background-color: rgb(144, 125, 252);
     border-radius: 50px;
     border: 1px solid rgb(144, 125, 252);
+}
 
+.btnDiv {
+    max-width: 200px;
+}
+
+.darkInput {
+    width: 100%;
+    max-width: 250px;
+    background-color: transparent;
+    color: white;
+    font-weight: 500;
+    border: 1px solid rgb(144, 125, 252);
 }
 
 .btnPurple:hover {

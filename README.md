@@ -1,17 +1,21 @@
 # Magic Box App
 
-This is a React-based app that creates an interactive grid with adjustable size. Users can manipulate the grid by clicking, double-clicking, or long-pressing individual cells.
+🧙📦 This is a React-based app that creates an interactive grid with adjustable size. Users can manipulate the grid by clicking, double-clicking, or long-pressing individual cells.
+
+## Test it Online! 
+
+https://magic-box-two.vercel.app/
 
 ## Approach
 
-The app is built using React and makes use of functional components and hooks for state management. The main component, `Grid`, is responsible for managing the grid's state and user interactions. It also renders the grid by mapping over the grid array and creating rows and cells.
+🛣️ The app is built using React and makes use of functional components and hooks for state management. The main component, `Grid`, is responsible for managing the grid's state and user interactions. It also renders the grid by mapping over the grid array and creating rows and cells.
 
 ## Basic Design Choices
 
-1. The state of the grid is stored as a 2D array, with each cell represented by a boolean value. The `gridSize` prop determines the dimensions of the grid.
-2. The grid is created by populating the 2D array with `false` values initially, which represent the inactive state of a cell.
-3. Event handlers are used to handle various user interactions like single-click, double-click, and long-press on grid cells. These event handlers update the grid state accordingly.
-4. The updated state is used to render the grid with appropriate CSS classes to visually represent the active/inactive state of each cell.
+1. 📊 The state of the grid is stored as a 2D array, with each cell represented by a boolean value. The `gridSize` prop determines the dimensions of the grid.
+2. 🌱 The grid is created by populating the 2D array with `false` values initially, which represent the inactive state of a cell.
+3. 👋 Event handlers are used to handle various user interactions like single-click, double-click, and long-press on grid cells. These event handlers update the grid state accordingly.
+4. 🖍️ The updated state is used to render the grid with appropriate CSS classes to visually represent the active/inactive state of each cell.
 
 ## Documentation
 
@@ -45,7 +49,7 @@ The app is built using React and makes use of functional components and hooks fo
 
 ### Event Handlers
 
-The following event handlers are used to manipulate the grid based on user interactions:
+👇 The following event handlers are used to manipulate the grid based on user interactions:
 
 - Single click: Flips the color of the clicked cell.
 - Double-click: Flips the color of the clicked cell and sets the same color for all other cells in the same column.
